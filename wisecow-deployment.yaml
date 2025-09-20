@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: wisecow
-        image: vishnu5031/vishnu2003cl:tagname 
+        image: vishnu5031/vishnu2003cl:tagname #GETTING IMAGE FROM DOCKER REGISTRY
         ports:
         - containerPort: 4499
