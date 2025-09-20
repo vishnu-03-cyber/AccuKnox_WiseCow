@@ -17,3 +17,4 @@ spec:
         image: vishnu5031/vishnu2003cl:tagname #GETTING IMAGE FROM DOCKER REGISTRY
         ports:
         - containerPort: 4499
+        imagePullPolicy: Always   # ALWAYS PULL LATEST IMAGE FROM DOCKERHUB
