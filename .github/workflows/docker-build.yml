@@ -26,3 +26,4 @@ jobs:
     - name: Push Docker image
       run: |
         docker push vishnu5031/vishnu2003cl:latest
+      #UPLOADING BUILT IMAGE TO DOCKER REGISTRY
