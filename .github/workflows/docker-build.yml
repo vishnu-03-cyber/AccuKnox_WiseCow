@@ -26,4 +26,16 @@ jobs:
     - name: Push Docker image
       run: |
         docker push vishnu5031/vishnu2003cl:latest
-      #UPLOADING BUILT IMAGE TO DOCKER REGISTRY
+      #ON SUCCESSFULL BUILD UPLOADING THE BUILT IMAGE TO DOCKER REGISTRY 
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+
+    - name: Configure kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+        export KUBECONFIG=$PWD/kubeconfig
+
+    - name: Deploy to Kubernetes
+      run: |
+        kubectl set image deployment/wisecow-deployment wisecow=vishnu5031/wishecow:latest 
+        kubectl rollout status deployment/wisecow-deployment
