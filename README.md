@@ -121,6 +121,21 @@ Since the Kind cluster is running **locally in WSL**, I used a **self-hosted Git
 
 ---
 
+## 🔒 HTTPS / TLS Setup
+
+This project enables **secure TLS communication** for the Wisecow application using Kubernetes **Ingress**.
+
+### TLS Secret
+A self-signed TLS certificate is created and added as a Kubernetes secret:
+
+```bash
+kubectl create secret tls wisecow-tls \
+  --cert=tls/tls.crt \
+  --key=tls/tls.key
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5be054c6-8656-468c-be34-174fd28288a6" />
+v<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/411dd687-43a7-4341-9030-32e65aa34fbd" />
+
+
 ## 7. How to Run Locally
 
 1. Clone the repository:
