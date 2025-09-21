@@ -1,21 +1,18 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
-# install dependencies
+# Install dependencies
 RUN apt-get update && \
-    apt-get install -y fortune-mod cowsay netcat && \
+    apt-get install -y fortune-mod cowsay netcat bash && \
+    # Create symlinks for fortune and cowsay
+    ln -s /usr/games/fortune /usr/local/bin/fortune && \
+    ln -s /usr/games/cowsay /usr/local/bin/cowsay && \
     rm -rf /var/lib/apt/lists/*
 
-# set working dir
 WORKDIR /app
-
-# copy the script
 COPY wisecow.sh .
-
-# make script executable
 RUN chmod +x wisecow.sh
 
-# expose app port
 EXPOSE 4499
 
-# run the app
-CMD ["./wisecow.sh"]
+CMD ["bash", "./wisecow.sh"]
+

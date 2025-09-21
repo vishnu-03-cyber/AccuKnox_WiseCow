@@ -7,6 +7,6 @@ spec:
   selector:
     app: wisecow
   ports:
-  - port: 80
-    targetPort: 4499
-    nodePort: 30080
+  - port: 4499        # Service port
+    targetPort: 4499  # Container port
+    nodePort: 30080   # NodePort on host

@@ -1,46 +1,28 @@
 #!/usr/bin/env bash
 
+# Wisecow server
 SRVPORT=4499
-RSPFILE=response
 
-rm -f $RSPFILE
-mkfifo $RSPFILE
-
-get_api() {
-	read line
-	echo $line
+# Check if dependencies exist
+check_dependencies() {
+  for cmd in fortune cowsay nc; do
+    if ! command -v $cmd >/dev/null 2>&1; then
+      echo "Error: $cmd is not installed. Please install it first."
+      exit 1
+    fi
+  done
 }
 
-handleRequest() {
-    # 1) Process the request
-	get_api
-	mod=`fortune`
-
-cat <<EOF > $RSPFILE
-HTTP/1.1 200
-
-
-<pre>`cowsay $mod`</pre>
-EOF
+# Start HTTP server
+start_server() {
+  echo "Wisecow server running on port $SRVPORT..."
+  while true; do
+    RESPONSE=$(fortune | cowsay)
+    echo -e "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<pre>$RESPONSE</pre>" \
+      | nc -l -p $SRVPORT -q 1
+  done
 }
 
-prerequisites() {
-	command -v cowsay >/dev/null 2>&1 &&
-	command -v fortune >/dev/null 2>&1 || 
-		{ 
-			echo "Install prerequisites."
-			exit 1
-		}
-}
+check_dependencies
+start_server
 
-main() {
-	prerequisites
-	echo "Wisdom served on port=$SRVPORT..."
-
-	while [ 1 ]; do
-		cat $RSPFILE | nc -lN $SRVPORT | handleRequest
-		sleep 0.01
-	done
-}
-
-main
