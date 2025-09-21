@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: self-hosted  # Uses your WSL self-hosted runner
+
     steps:
       # Step 1: Checkout code
       - name: Checkout Repository
@@ -33,6 +34,15 @@ jobs:
 
       # Step 5: Update local Kind deployment
       - name: Deploy to Kind Kubernetes
-        run: |
+        run: |          
+          docker pull vishnu5031/wisecow:latest        
           kubectl set image deployment/wisecow-deployment wisecow=vishnu5031/wisecow:latest
+          kubectl rollout restart deployment/wisecow-deployment
           kubectl rollout status deployment/wisecow-deployment
+
+      # Step 6: Verify Deployment
+      - name: Verify Pods and Services
+        run: |
+          kubectl get pods -o wide
+          kubectl get svc
+
