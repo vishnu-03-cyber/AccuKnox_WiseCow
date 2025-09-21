@@ -129,7 +129,7 @@ This project enables **secure TLS communication** for the Wisecow application us
 A self-signed TLS certificate is created and added as a Kubernetes secret:
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5be054c6-8656-468c-be34-174fd28288a6" />
-v<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/411dd687-43a7-4341-9030-32e65aa34fbd" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/411dd687-43a7-4341-9030-32e65aa34fbd" />
 
 ```bash
 kubectl create secret tls wisecow-tls \
