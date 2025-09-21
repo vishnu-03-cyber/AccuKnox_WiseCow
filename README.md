@@ -79,6 +79,7 @@ http://localhost:4499
 > Without port-forwarding (or NodePort), you cannot see the application output from your host machine.
 
 ---
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/61e74fa7-d5da-4d7e-892d-03c9ee28f9bb" />
 
 ### 5. Continuous Integration / Continuous Deployment (CI/CD)
 
@@ -110,7 +111,8 @@ Since the Kind cluster is running **locally in WSL**, I used a **self-hosted Git
 
 **Application in browser:**
 
-![Wisecow in Browser](screenshots/wisecow_browser.png)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/cea0362c-f666-4d54-a314-bdd5e2f68e0e" />
+
 
 **Kubernetes pods and services:**
 
