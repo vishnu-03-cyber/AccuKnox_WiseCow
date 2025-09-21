@@ -117,9 +117,7 @@ Since the Kind cluster is running **locally in WSL**, I used a **self-hosted Git
 
 **Kubernetes pods and services:**
 
-![K8s Pods](screenshots/k8s_pods.png)
-
-> Note: Replace the screenshot placeholders with actual images from your setup.
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/20a1cd23-3514-473e-94b3-611ed5aa34d8" />
 
 ---
 
