@@ -107,7 +107,8 @@ Since the Kind cluster is running **locally in WSL**, I used a **self-hosted Git
 
 **Runner logs:**
 
-![Runner logs](screenshots/runner_logs.png)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/57f2a231-e0d7-4974-b432-727acc2b4474" />
+
 
 **Application in browser:**
 
