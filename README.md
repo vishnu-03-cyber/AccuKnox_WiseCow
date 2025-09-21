@@ -60,11 +60,27 @@ kubectl get pods
 kubectl get services
 ```
 
-- Open the app in browser: `http://localhost:30080`
+---
+
+### 4. Accessing Wisecow in Browser
+
+Since the cluster is local, you can **expose the service** using `kubectl port-forward`:
+
+```bash
+kubectl port-forward svc/wisecow-service 4499:4499
+```
+
+- Then open your browser and go to:
+
+```
+http://localhost:4499
+```
+
+> Without port-forwarding (or NodePort), you cannot see the application output from your host machine.
 
 ---
 
-### 4. Continuous Integration / Continuous Deployment (CI/CD)
+### 5. Continuous Integration / Continuous Deployment (CI/CD)
 
 To automate build and deployment:
 
@@ -86,7 +102,7 @@ Since the Kind cluster is running **locally in WSL**, I used a **self-hosted Git
 
 ---
 
-### 5. Screenshots
+### 6. Screenshots
 
 **Runner logs:**
 
@@ -104,7 +120,7 @@ Since the Kind cluster is running **locally in WSL**, I used a **self-hosted Git
 
 ---
 
-## 6. How to Run Locally
+## 7. How to Run Locally
 
 1. Clone the repository:
 
@@ -132,23 +148,30 @@ kubectl apply -f wisecow-deployment.yaml
 kubectl apply -f wisecow-service.yaml
 ```
 
-5. Access the app:
+5. Expose service to access in browser:
+
+```bash
+kubectl port-forward svc/wisecow-service 4499:4499
+```
+
+6. Open browser:
 
 ```
-http://localhost:30080
+http://localhost:4499
 ```
 
 ---
 
-### 7. Notes
+### 8. Notes
 
 - Using **Kind** keeps the environment lightweight and fast for local development.
 - WSL required small script modifications in `wisecow.sh` for compatibility.
 - **Self-hosted runner** allows GitHub Actions to deploy directly to the local cluster without exposing it publicly.
+- **Port-forwarding is required** to access the Wisecow application in your host browser.
 
 ---
 
-### 8. References
+### 9. References
 
 - [Kind — Kubernetes in Docker](https://kind.sigs.k8s.io/)
 - [GitHub Actions — Self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners)
