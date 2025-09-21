@@ -131,6 +131,23 @@ A self-signed TLS certificate is created and added as a Kubernetes secret:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5be054c6-8656-468c-be34-174fd28288a6" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/411dd687-43a7-4341-9030-32e65aa34fbd" />
 
+## 🛡️ Zero Trust with KubeArmor
+
+This project demonstrates **Zero Trust security** in Kubernetes using KubeArmor.
+
+- Applied a **Zero Trust policy** to the `wisecow` pod  
+- Unauthorized actions like creating files in `/app` or running `/bin/bash` are **blocked**  
+- Violations are logged in real time by the KubeArmor controller  
+
+### Example Violation Logs
+2025-09-21T09:30:10Z VIOLATION Pod=wisecow-deployment tried to write to /app/testfile blocked by wisecow-zero-trust
+2025-09-21T09:30:12Z VIOLATION Pod=wisecow-deployment tried to execute /bin/bash blocked by wisecow-zero-trust
+
+<img width="1920" height="1080" alt="Screenshot (52)" src="https://github.com/user-attachments/assets/4349043b-541d-436a-aa2a-4e6f57f0301d" />
+<img width="1920" height="1080" alt="Screenshot (56)" src="https://github.com/user-attachments/assets/89b47cb0-aba4-4217-bf76-70913507704e" />
+
+
+
 ```bash
 kubectl create secret tls wisecow-tls \
   --cert=tls/tls.crt \
