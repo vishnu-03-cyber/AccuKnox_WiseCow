@@ -6,11 +6,11 @@ LOG_FILE="./health_check.log"
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
 # THRESHOLDS
-CPU_THRESHOLD=80      # PERCENT
-MEM_THRESHOLD=80      # PERCENT
-DISK_THRESHOLD=80     # PERCENT
+CPU_THRESHOLD=5      # PERCENT
+MEM_THRESHOLD=5      # PERCENT
+DISK_THRESHOLD=5     # PERCENT
 
-# CPU USAGE
+# CPU USAGE (user + system)
 CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | awk '{print int($2 + $4)}')
 
 # MEMORY USAGE
@@ -21,16 +21,16 @@ MEM_USAGE=$(free | awk '/Mem:/ {printf("%d", $3/$2 * 100)}')
 # DISK USAGE
 DISK_USAGE=$(df / | awk 'NR==2 {print int($5)}')
 
-# TOP 5 PROCESSES BY MEMORY USAGE
-TOP_PROCESSES=$(ps aux --sort=-%mem | awk 'NR<=5 {print $0}')
+# TOP 5 PROCESSES BY MEMORY (clean format)
+TOP_PROCESSES=$(ps -eo pid,comm,%mem,%cpu --sort=-%mem | head -n 6)
 
 # LOG SYSTEM HEALTH
 {
   echo "---------- HEALTH CHECK REPORT: $DATE ----------"
-  echo "CPU Usage: $CPU_USAGE%"
-  echo "Memory Usage: Total=${MEM_TOTAL}MB, Used=${MEM_USED}MB (${MEM_USAGE}%)"
-  echo "Disk Usage: $DISK_USAGE%"
-  echo "Top 5 Memory-Consuming Processes:"
+  echo "CPU Usage: ${CPU_USAGE}% (Threshold: ${CPU_THRESHOLD}%)"
+  echo "Memory Usage: Total=${MEM_TOTAL}MB, Used=${MEM_USED}MB (${MEM_USAGE}%) (Threshold: ${MEM_THRESHOLD}%)"
+  echo "Disk Usage: ${DISK_USAGE}% (Threshold: ${DISK_THRESHOLD}%)"
+  echo "Top 5 Memory-Consuming Processes (PID | Command | %MEM | %CPU):"
   echo "$TOP_PROCESSES"
 
   # ALERTS
@@ -40,3 +40,4 @@ TOP_PROCESSES=$(ps aux --sort=-%mem | awk 'NR<=5 {print $0}')
 
   echo "-------------------------------------------------"
 } >> $LOG_FILE
+
